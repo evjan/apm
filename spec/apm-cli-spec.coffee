@@ -33,8 +33,9 @@ describe 'apm command line interface', ->
         expect(console.log).toHaveBeenCalled()
         lines = console.log.argsForCall[0][0].split('\n')
         expect(lines[0]).toBe "apm  #{require('../package.json').version}"
-        expect(lines[1]).toBe "npm  #{require('npm/package.json').version}"
-        expect(lines[2]).toBe "node #{process.versions.node}"
+        expect(lines[1]).toMatch /^atom \d+.\d+.\d+/
+        expect(lines[2]).toBe "npm  #{require('npm/package.json').version}"
+        expect(lines[3]).toBe "node #{process.versions.node}"
 
   describe 'when an unrecognized command is specified', ->
     it 'prints an error message and exits', ->
